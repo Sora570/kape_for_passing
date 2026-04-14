@@ -1,0 +1,73 @@
+/* Action Buttons for Tables - Tablet Optimized */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.action-btn ion-icon {
+    font-size: 20px;
+}
+
+.action-btn-edit {
+    background: #17a2b8;
+    color: white;
+}
+
+.action-btn-edit:hover {
+    background: #138496;
+    transform: translateY(-2px);
+}
+
+.action-btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.action-btn-delete:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+.action-btn-reset {
+    background: #ffc107;
+    color: #212529;
+}
+
+.action-btn-reset:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+}
+
+/* Tooltip for action buttons */
+.action-btn[title] {
+    position: relative;
+}
+
+/* Ensure touch-friendly spacing on mobile */
+@media screen and (max-width: 768px) {
+    .action-buttons {
+        gap: 6px;
+    }
+
+    .action-btn {
+        min-width: 40px;
+        min-height: 40px;
+        padding: 8px;
+    }
+}

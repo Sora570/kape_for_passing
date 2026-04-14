@@ -1,0 +1,310 @@
+/* Transactions Page Styles */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+
+.transactions-root {
+    background: var(--brown2);
+    padding: 24px;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.transactions-header .transactions-title {
+    font-family: "Fredoka", sans-serif;
+    margin-bottom: 8px;
+    font-size: 28px;
+    color: var(--Darkbrown);
+    font-weight: bold;
+}
+
+.transactions-header .transactions-subtitle {
+    color: #9c6644;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.transactions-filters {
+    margin: 1.8rem 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.55);
+    padding: 16px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-select,
+.filter-input {
+    background: white;
+    border: 2px solid #e1e5e9;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    border-color: #7f5539;
+    outline: none;
+}
+
+.btn-secondary {
+    padding: 10px 18px;
+    background: #faf8f6;
+    border: 2px solid #e8dfd4;
+    color: #6B4B38;
+    border-radius: 8px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #e8dfd4;
+    border-color: #d4c5b4;
+}
+
+.transactions-table-container {
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(103, 77, 56, 0.25);
+}
+
+.transactions-table-scroll {
+    width: 100%;
+}
+
+.transactions-table {
+    margin: 0;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0px;
+}
+
+.transactions-table thead {
+    background-color: rgba(255, 255, 255, 0.87);
+}
+
+.transactions-table th {
+    width: 9rem;
+    height: 42px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background-color: rgba(246, 244, 241, 0.94);
+    border: 1px solid #efeded;
+    font-weight: 600;
+    color: #9b7344;
+    font-size: 13px;
+    text-align: start;
+}
+
+.transactions-table td {
+    padding: 10px 12px;
+    text-align: start;
+    font-size: 13px;
+    color: #2B2020;
+    border-bottom: 1px solid rgba(158, 136, 118, 0.27);
+    word-break: break-all;
+}
+
+.transactions-summary {
+    border-top: 1px solid #e8dfd4;
+    margin-top: 24px;
+    padding-top: 24px;
+}
+
+.summary-card {
+    background: #f9f8f5;
+    border-radius: 8px;
+    border: 2px solid rgba(236, 224, 198, 0.55);
+    padding: 20px;
+    margin: 0 8px 12px 0;
+    display: inline-block;
+    width: calc(33% - 8px);
+    min-width: 170px;
+    font-family: "Fredoka", sans-serif;
+}
+
+.summary-card h4 {
+    color: #664844;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.summary-card span {
+    color: #7f5539;
+    font-size: 17px;
+}
+
+.btn-small {
+    border: 2px solid #94848a;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background: #f8f7fa;
+    color: #563c63;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+.btn-small.btn-danger {
+    border-color: #f87171;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-small.btn-danger:hover {
+    background: #fecaca;
+}
+
+.cashier-badge {
+    background: #f0f4f2;
+    border: 1px solid #4b9462;
+    padding: 3px 8px;
+    border-radius: 8px;
+    color: #13423f;
+    font-weight: bold;
+}
+
+.status-badge {
+    display: inline;
+    padding: 6px 8px;
+    color: #777;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.status-badge.status-pending-void {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.status-badge.cash {
+    background: #efe8e3;
+    color: #7f5539;
+}
+
+.status-badge.card {
+    background: #fff0ca;
+    color: #a85502;
+}
+
+.status-badge.gcash {
+    background: #eefaee;
+    color: #086419;
+}
+
+.status.completed {
+    color: #059669;
+}
+
+.status.pending {
+    color: #d48856;
+}
+
+.status.cancelled {
+    color: #DC2626;
+}
+
+@media only screen and (max-width:1024px) {
+    .summary-card {
+        width: 100%;
+    }
+
+    .filter-row {
+        flex-direction: column;
+    }
+}
+
+/* Mobile: scrollable container so table doesn't overflow */
+@media screen and (max-width: 767px) {
+    .transactions-table-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .transactions-table {
+        min-width: 700px;
+    }
+}
+
+/* Mobile card layout for transactions table (narrow screens) */
+@media screen and (max-width: 480px) {
+    .transactions-table-container {
+        padding: 12px;
+    }
+
+    .transactions-table-scroll {
+        overflow: visible;
+    }
+
+    .transactions-table {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        font-size: 0.85rem;
+    }
+
+    .transactions-table thead {
+        display: none;
+    }
+
+    .transactions-table tbody {
+        display: block;
+    }
+
+    .transactions-table tr {
+        display: block;
+        margin-bottom: 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 12px;
+        background: #fff;
+    }
+
+    .transactions-table td {
+        display: block;
+        text-align: right;
+        padding: 6px 10px 6px 45%;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .transactions-table td:last-child {
+        border-bottom: none;
+    }
+
+    .transactions-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: 600;
+        width: 40%;
+        text-align: left;
+        font-size: 0.8rem;
+        color: #6b7280;
+    }
+
+    .transactions-table td:first-child {
+        text-align: left;
+        padding-left: 10px;
+        font-weight: 600;
+        padding-bottom: 8px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .transactions-table td:first-child:before {
+        display: none;
+    }
+
+    .transactions-table .transaction-view-btn {
+        min-height: 36px;
+    }
+}

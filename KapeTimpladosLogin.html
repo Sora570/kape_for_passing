@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css" integrity="sha512-B46MVOJpI6RBsdcU307elYeStF2JKT87SsHZfRSkjVi4/iZ3912zXi45X5/CBr/GbCyLx6M1GQtTKYRd52Jxgw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/loginRegister.css">
+</head>
+<body>
+    <div class="container" id="ContainerForm">
+        
+        <div id="toast" class="toast">
+            <span id="toast-message"></span>
+        </div>
+
+        <div class="form-container signin-container">
+            <form id="login-form">
+                <h1 class="heading">Kape Timplado's POS</h1>
+                <p class="login-description">Use your username or employee ID and password/PIN to sign in.</p>
+                <input type="text" id="login-identifier" placeholder="Username or Employee ID" required autocomplete="username" maxlength="50" />
+                <input type="password" id="login-password" placeholder="Password or 4-digit PIN" required autocomplete="current-password" maxlength="64" />
+                <button type="submit" id="login-btn">Sign In</button>
+                <div style="margin-top:12px; text-align:center">
+                    <a href="admin_forgot.html" style="font-size:0.95rem; color:#2563eb;">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1></h1>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+    
+    <script>
+        const container = document.getElementById("ContainerForm");
+    </script>
+    <script src="js/uiToast.js"></script>
+
+    <script>
+    // When this login page is restored via back-button, terminate any active server session
+    (function () {
+        window.addEventListener('pageshow', function (event) {
+            const navEntries = (performance.getEntriesByType && performance.getEntriesByType('navigation')) || [];
+            const navType = (navEntries[0] && navEntries[0].type) || (performance.navigation && performance.navigation.type) || '';
+            if (event.persisted || navType === 'back_forward') {
+                // Best-effort: tell server to destroy session so forward navigation can't show protected pages
+                fetch('db/logout.php', { method: 'POST', credentials: 'same-origin', cache: 'no-store' })
+                    .catch(() => { /* ignore failures */ });
+
+                // Clear client-side volatile data
+                try { sessionStorage.clear(); } catch (e) {}
+            }
+        });
+    })();
+    </script>
+
+    <script type="module" src="js/loginRegister.js"></script>
+</body>
+</html>

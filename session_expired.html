@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Session Expired</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/loginRegister.css">
+    <style>
+        .session-expired-icon {
+            font-size: 48px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .session-expired-heading {
+            color: #7f5539;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .session-expired-message {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .back-to-login-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .form-container {
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .session-expired-content {
+            text-align: center;
+            padding: 0 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container signin-container">
+            <div class="session-expired-content">
+                <div class="session-expired-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h1 class="session-expired-heading">Session Expired</h1>
+                <p class="session-expired-message">
+                    Your session has expired due to inactivity. 
+                    <br>For security reasons, please log in again to continue.
+                </p>
+                <a href="login" class="back-to-login-btn">
+                    <button type="button">Sign In Again</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1></h1>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // When this session expired page is reached, ensure session is cleared and prevent forward navigation
+        (function () {
+            window.addEventListener('pageshow', function (event) {
+                const navEntries = (performance.getEntriesByType && performance.getEntriesByType('navigation')) || [];
+                const navType = (navEntries[0] && navEntries[0].type) || (performance.navigation && performance.navigation.type) || '';
+                if (event.persisted || navType === 'back_forward') {
+                    // Clear session
+                    fetch('db/logout.php', { method: 'POST', credentials: 'same-origin', cache: 'no-store' })
+                        .catch(() => { /* ignore failures */ });
+
+                    // Clear client-side storage
+                    try { sessionStorage.clear(); } catch (e) {}
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

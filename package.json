@@ -1,0 +1,11 @@
+{
+  "name": "kapetimplados-tests",
+  "private": true,
+  "scripts": {
+    "test:backforward": "node tests/back_forward.test.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^20.0.0",
+    "node-fetch": "^2.6.7"
+  }
+}

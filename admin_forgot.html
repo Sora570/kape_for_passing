@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Admin password reset</title>
+    <link rel="stylesheet" href="css/loginRegister.css">
+</head>
+
+<body>
+    <div class="container" style="max-width:420px; margin:60px auto; padding:24px;">
+        <h2 style="margin-bottom:8px">Admin password reset</h2>
+        <p style="color:#6b7280; margin-bottom:16px">Enter the admin account email or username. If an account exists
+            you'll receive a reset link.</p>
+        <div id="toast" class="toast"><span id="toast-message"></span></div>
+        <form id="forgot-form">
+            <input type="text" id="identifier" placeholder="Email or Username" required maxlength="100"
+                class="form-input" style="width:100%; margin-bottom:12px;">
+            <button id="send-btn" type="submit" class="btn-primary">Send reset link</button>
+            <a href="login" style="display:block; margin-top:12px; color:#2563eb;">Back to sign in</a>
+        </form>
+    </div>
+
+    <script src="js/uiToast.js"></script>
+    <script>
+        const form = document.getElementById('forgot-form');
+        const btn = document.getElementById('send-btn');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const identifier = document.getElementById('identifier').value.trim();
+            if (!identifier) { showToast('Please enter email or username', 'error'); return; }
+            btn.disabled = true;
+            fetch('db/admin_forgot_request.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'identifier=' + encodeURIComponent(identifier)
+            }).then(r => r.json()).then(resp => {
+                showToast(resp.message || 'If an account exists, an email will be sent', 'success');
+                btn.disabled = false;
+            }).catch(err => {
+                console.error(err);
+                showToast('If an account exists, an email will be sent', 'success');
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+
+</html>
